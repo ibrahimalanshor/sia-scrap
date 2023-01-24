@@ -1,0 +1,7 @@
+{
+    "loginForm": "#formLogin form",
+    "nimInput": "#loginNipNim",
+    "passwordInput": "#loginPsw",
+    "chapthaQuestionP": "#loginPsw + p",
+    "chapthaAnswerInput": "#loginPsw + p + input"
+}
