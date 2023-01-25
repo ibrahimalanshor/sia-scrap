@@ -1,30 +1,30 @@
-const inquirer = require('inquirer')
+const inquirer = require('inquirer');
 
 module.exports = async function login() {
-    const selectedModule = inquirer.prompt([
+  const selectedModule = inquirer.prompt([
+    {
+      name: 'name',
+      message: 'Select Module',
+      type: 'list',
+      choices: [
         {
-            name: 'name',
-            message: 'Select Module',
-            type: 'list',
-            choices: [
-                {
-                    name: 'KHS',
-                    value: 'khs'
-                }
-            ],
-            validate: function (value) {
-                const done = this.async()
-                
-                if (!value) {
-                    done('Module Invalid')
+          name: 'KHS',
+          value: 'khs',
+        },
+      ],
+      validate: function (value) {
+        const done = this.async();
 
-                    return false
-                }
-                
-                done(null, true)
-            },
+        if (!value) {
+          done('Module Invalid');
+
+          return false;
         }
-    ])
 
-    return selectedModule
-}
+        done(null, true);
+      },
+    },
+  ]);
+
+  return selectedModule;
+};

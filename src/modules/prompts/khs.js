@@ -1,34 +1,34 @@
-const inquirer = require('inquirer')
+const inquirer = require('inquirer');
 
 module.exports = async function login() {
-    const type = inquirer.prompt([
+  const type = inquirer.prompt([
+    {
+      name: 'name',
+      message: 'Select Semester',
+      type: 'list',
+      choices: [
         {
-            name: 'name',
-            message: 'Select Semester',
-            type: 'list',
-            choices: [
-                {
-                    name: 'All Semester',
-                    value: 'all'
-                },
-                {
-                    name: 'Current Semester',
-                    value: 'current'
-                }
-            ],
-            validate: function (value) {
-                const done = this.async()
-                
-                if (!value) {
-                    done('Type Invalid')
+          name: 'All Semester',
+          value: 'all',
+        },
+        {
+          name: 'Current Semester',
+          value: 'current',
+        },
+      ],
+      validate: function (value) {
+        const done = this.async();
 
-                    return false
-                }
-                
-                done(null, true)
-            },
+        if (!value) {
+          done('Type Invalid');
+
+          return false;
         }
-    ])
 
-    return type
-}
+        done(null, true);
+      },
+    },
+  ]);
+
+  return type;
+};

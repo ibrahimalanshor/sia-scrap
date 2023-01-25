@@ -1,1 +1,1 @@
-exports.khs = require('./khs')
+exports.khs = require('./khs');
