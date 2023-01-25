@@ -4,7 +4,7 @@ module.exports = async function login() {
     const type = inquirer.prompt([
         {
             name: 'name',
-            message: 'Enter Type',
+            message: 'Select Semester',
             type: 'list',
             choices: [
                 {

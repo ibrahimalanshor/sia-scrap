@@ -1,23 +1,15 @@
+const { saveFile } = require('../../lib/fs')
+const { parseTable } = require('../parser/table')
+
 async function getAllKhs(page) {
     const allTable = await page.$$('.table-responsive')
     const khsTable = allTable[1]
 
-    const headersTh = await khsTable.$$('th')
-    const columns = await Promise.all(headersTh.map(async headerTh => await page.evaluate(el => el.textContent.trim(), headerTh)))
+    const result = await parseTable(page, khsTable)
 
-    const rowsTr = await khsTable.$$('tbody tr')
-    const rows = await Promise.all(rowsTr.map(async rowTr => {
-        const res = {}
-        const rowTds = await rowTr.$$('td')
+    const filename = await saveFile('khs-all-semester.json', JSON.stringify(result, null, 4))
 
-        columns.forEach(async (column, index) => {
-            res[column] = await page.evaluate(el => el.textContent.trim(), rowTds[index])
-        })
-
-        return res
-    }))
-
-    console.log(rows)
+    console.log(`result saved: `, filename)
 }
 
 module.exports = async function khs(page, type) {
