@@ -1,5 +1,8 @@
-exports.parseTable = async function parseTable(page, table) {
-    const ths = await table.$$('th')
+exports.parseTable = async function parseTable(page, table, config = {}) {
+    const theadTrs = await table.$$('thead tr')
+    const theadTr = theadTrs[config.headerRowNum ?? 0]
+
+    const ths = await theadTr.$$('th')
     const columns = await Promise.all(ths.map(async th => await page.evaluate(el => el.textContent.trim(), th)))
 
     const trs = await table.$$('tbody tr')
