@@ -5,11 +5,14 @@ const loginScrap = require('./src/modules/scraps/login')
 const flows = require('./src/flows')
 
 loginPrompt().then(async answers => {
-    const { page } = await createApp()
+    const { page, browser } = await createApp()
 
     await loginScrap(page, answers)
 
     const selectedModule = await modulePrompt()
 
-    flows[selectedModule.name](page)
+    await flows[selectedModule.name](page)
+    
+    browser.close()
+    process.exit(0)
 })
